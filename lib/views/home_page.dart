@@ -15,9 +15,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("Home")),
+        title: Text("Home", style: TextStyle(fontWeight: FontWeight.bold)),
+        actions: [Icon(Icons.home)],
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey,
+        elevation: 0,
       ),
       drawer: const Mydrawer(),
+      body: _buildUserList(),
     );
   }
 
@@ -44,15 +49,23 @@ class HomePage extends StatelessWidget {
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    return UserTile(
+    if (userData["email"] != _authServices.getCurrentUser()) {
+      return UserTile(
         text: userData["email"],
         onTap: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    ChatPage(receiverEmail: userData["email"]),
-              ));
-        });
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receiverEmail: userData["email"],
+                receiverID: userData["uid"],
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      return Container();
+    }
   }
 }

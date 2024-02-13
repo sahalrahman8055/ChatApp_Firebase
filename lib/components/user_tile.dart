@@ -1,3 +1,4 @@
+import 'package:chatapp_firebase/constant/size.dart';
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
@@ -14,8 +15,10 @@ class UserTile extends StatelessWidget {
           color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(12),
         ),
+        margin: EdgeInsetsDirectional.symmetric(vertical: 5, horizontal: 25),
+        padding: EdgeInsetsDirectional.all(20),
         child: Row(
-          children: [Icon(Icons.person),],
+          children: [Icon(Icons.person), kWidth20, Text(text)],
         ),
       ),
     );
